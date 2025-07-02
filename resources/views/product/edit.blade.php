@@ -30,7 +30,8 @@
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a href="{{route('product.create') }}" class="rounded-md  px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white" aria-current="page">Add Product</a>
               <a href="{{route('product.store') }}" class="rounded-md  px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white ">Product List</a>
-              <a href="{{route('product.edit') }}" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-gray-300 ">Edit</a>
+              <a href="{{ route('product.edit', ['product' => 1]) }}" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-gray-300 ">Edit</a>
+>
             </div>
           </div>
         </div>
@@ -156,7 +157,9 @@
 </head>
 <body>
 <div>
-  <form method="POST" action="{{route('product.update', ['product' => $product])}}">
+  <form method="POST" action="{{ route('product.update', ['product' => $product->id]) }}">
+
+
     @csrf
     @method('PUT')
 
@@ -176,6 +179,13 @@
     <div>
     <input type="number" name="price" value="{{$product->price}}" placeholder="Enter price (e.g. 19.99)" required step="0.01" min="0" max="9999.99"><br><br>
     
+    <label for="description"><strong>Description:</strong></label><br>
+    <textarea name="description" rows="3" placeholder="Enter description">{{ $product->detail->description ?? '' }}</textarea><br><br>
+
+    
+    <label for="quantity"><strong>Quantity:</strong></label><br>
+    <input type="number" name="quantity" value="{{ $product->detail->quantity ?? 0 }}" step="1" min="0" required><br><br>
+
     </div>
     <input type="submit" value="Edit the product">
   </form>

@@ -152,6 +152,8 @@
         <th>ID</th>
         <th>Product Name</th>
         <th>Price (USD)</th>
+        <th>Description</th> 
+        <th>Quantity</th>   
         <th>Edit</th>
         <th>Delete</th>
     </tr>
@@ -162,6 +164,8 @@
         <td class="px-6 py-6">{{ $iteam->id }}</td>
         <td class="px-6 py-6">{{ $iteam->name }}</td>
         <td class="px-6 py-6">{{ $iteam->price }}</td>
+        <td>{{ $iteam->detail->description ?? 'No Description' }}</td>
+        <td>{{ $iteam->detail->quantity ?? '0' }}</td>
         <td class="px-6 py-6"><a href="{{route('product.edit', ['product'=> $iteam])}}">Edit</a> </td>
         <td>
           <form method = "POST" action = "{{route('product.delete',['product' => $iteam]) }}">

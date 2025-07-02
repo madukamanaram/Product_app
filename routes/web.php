@@ -17,3 +17,6 @@ Route::put('/product/update',[ProductController::class, 'update'] )-> name ('pro
 Route::delete('/product/delete',[ProductController::class, 'delete'] )-> name ('product.delete');
 
 Route::get('/product/search',[ProductController::class, 'search'] )-> name ('product.search');
+
+
+

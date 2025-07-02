@@ -31,7 +31,7 @@
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a href="{{route('product.create') }}" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white " aria-current="page">Add Product</a>
               <a href="{{route('product.store') }}" class="rounded-md  px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white ">Product List</a>
-              <a href="{{route('product.edit') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Edit</a>
+              
             </div>
           </div>
         </div>
@@ -187,6 +187,15 @@ form {
 
     <label for="price"><strong>Price (USD):</strong></label><br>
     <input type="number" id="price" name="price" placeholder="Enter price (e.g. 19.99)" required step="0.01" min="0" max="9999.99"><br><br>
+
+    
+    <label for="description"><strong>Description:</strong></label><br>
+    <textarea id="description" name="description" placeholder="Enter product description"></textarea><br><br>
+
+    
+    <label for="quantity"><strong>Quantity:</strong></label><br>
+    <input type="number" id="quantity" name="quantity" placeholder="Enter quantity" required step="0.01" min="0"><br><br>
+
 
     <input type="submit" value="Add the product">
   </form>

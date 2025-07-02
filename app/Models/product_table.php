@@ -11,4 +11,15 @@ class product_table extends Model
         'name',
         'price'
     ];
+
+
+    // app/Models/Product.php
+
+public function detail()
+{
+    return $this->hasOne(ProductDetail::class , 'product_id');
+}
+
+
+
 }
