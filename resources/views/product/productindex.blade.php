@@ -2,6 +2,15 @@
     <head>
   <title>Product App</title>
   <script src = "https://cdn.tailwindcss.com"></script>
+  <style>
+  th, td {
+    padding: 1rem 1.5rem; /* Equivalent to px-6 py-4 */
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb; /* Tailwind's border-gray-200 */
+    color: #374151; /* Optional: Tailwind's text-gray-700 */
+    font-weight: 600;
+  }
+</style>
     </head>
 
     <body class="h-full">
@@ -24,14 +33,14 @@
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
           <div class="shrink-0">
-            <img class="size-8" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
+            <img class="size-8" src="{{ asset('images/product-logo.png') }}" alt="Product App Logo"  />
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a href="{{route('product.create') }}" class="rounded-md  px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white" aria-current="page">Add Product</a>
               <a href="{{route('product.store') }}" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-gray-300 ">Product List</a>
-              <a href="{{route('product.edit') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Edit</a>
+              
             </div>
           </div>
         </div>
@@ -45,49 +54,8 @@
               </svg> -->
             </button>
 
-            <!-- Profile dropdown -->
-            <!-- <div class="relative ml-3">
-              <div>
-                <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                  <span class="absolute -inset-1.5"></span>
-                  <span class="sr-only">Open user menu</span>
-                  <img class="size-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                </button>
-              </div> -->
-
-              <!--
-                Dropdown menu, show/hide based on menu state.
-
-                Entering: "transition ease-out duration-100"
-                  From: "transform opacity-0 scale-95"
-                  To: "transform opacity-100 scale-100"
-                Leaving: "transition ease-in duration-75"
-                  From: "transform opacity-100 scale-100"
-                  To: "transform opacity-0 scale-95"
-              -->
-              <!-- <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"> -->
-                <!-- Active: "bg-gray-100 outline-hidden", Not Active: "" -->
-                <!-- <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a> -->
-              <!-- </div> -->
-            <!-- </div>
-          </div>
-        </div>
-        <div class="-mr-2 flex md:hidden"> -->
-          <!-- Mobile menu button -->
-          <!-- <button type="button" class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
-            <span class="absolute -inset-0.5"></span>
-            <span class="sr-only">Open main menu</span>
-            Menu open: "hidden", Menu closed: "block"
-             <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg> -->
-            <!-- Menu open: "block", Menu closed: "hidden" -->
-            <!-- <svg class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg> -->
-          <!-- </button> -->
+            
+          
         </div>
       </div>
     </div>
@@ -155,7 +123,7 @@
         <th>Description</th> 
         <th>Quantity</th>   
         <th>Edit</th>
-        <th>Delete</th>
+        <th >Delete </th>
     </tr>
         </thead>
         <tbody class="divide-y divide-gray-200 text-sm">
@@ -164,14 +132,14 @@
         <td class="px-6 py-6">{{ $iteam->id }}</td>
         <td class="px-6 py-6">{{ $iteam->name }}</td>
         <td class="px-6 py-6">{{ $iteam->price }}</td>
-        <td>{{ $iteam->detail->description ?? 'No Description' }}</td>
+        <td >{{ $iteam->detail->description ?? 'No Description' }}</td>
         <td>{{ $iteam->detail->quantity ?? '0' }}</td>
-        <td class="px-6 py-6"><a href="{{route('product.edit', ['product'=> $iteam])}}">Edit</a> </td>
+        <td ><a href="{{route('product.edit', ['product'=> $iteam])}}" class="bg-blue-600 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer transition duration-200" >Edit</a> </td>
         <td>
           <form method = "POST" action = "{{route('product.delete',['product' => $iteam]) }}">
             @csrf
             @method('Delete')
-             <input type="submit" value = "Delete"/>
+             <input type="submit" value = "Delete" class="bg-red-500 text-sm font-medium text-white px-4 py-2 rounded hover:bg-red-700 cursor-pointer transition duration-200"/>
           </form>
         </td>
 

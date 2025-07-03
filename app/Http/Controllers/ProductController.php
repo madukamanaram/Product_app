@@ -85,11 +85,11 @@ public function update(product_table $product, Request $request) {
 
 
 
-    public function delete(product_table $product)
-    {
-        $product->delete();
-        return redirect(route('product.index'));
-    }
+    public function destroy(product_table $product)
+{
+    $product->delete();
+    return redirect()->route('product.index')->with('success', 'Product deleted!');
+}
 
     public function search(Request $request)
     {
