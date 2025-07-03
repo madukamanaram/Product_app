@@ -124,25 +124,25 @@
     
     
 
-    <h2>Edit the Product</h2>
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900" >Edit the Product</h2>
 
     <label for="name"><strong>Product Name:</strong></label><br>
     
     <div>
-    <input type="text" id="name" name="name" value="{{$product->name}}" ><br><br>
+    <input type="text" id="name" name="name" value="{{$product->name}}" class="w-full px-3 py-2 border border-gray-300 rounded mt-2" ><br><br>
     </div>
     <div>
     <label for="price"><strong>Price:</strong></label><br>
     </div>
     <div>
-    <input type="number" name="price" value="{{$product->price}}" placeholder="Enter price (e.g. 19.99)" required step="0.01" min="0" max="9999.99"><br><br>
+    <input type="number" name="price" value="{{$product->price}}" placeholder="Enter price (e.g. 19.99)" class="w-full px-3 py-2 border border-gray-300 rounded mt-2" required step="0.01" min="0" max="9999.99"><br><br>
     
     <label for="description"><strong>Description:</strong></label><br>
-    <textarea name="description" rows="3" placeholder="Enter description">{{ $product->detail->description ?? '' }}</textarea><br><br>
+    <textarea name="description" rows="3" placeholder="Enter description" class="w-full px-3 py-2 border border-gray-300 rounded mt-2" >{{ $product->detail->description ?? '' }} </textarea><br><br>
 
     
     <label for="quantity"><strong>Quantity:</strong></label><br>
-    <input type="number" name="quantity" value="{{ $product->detail->quantity ?? 0 }}" step="1" min="0" required><br><br>
+    <input type="number" name="quantity" value="{{ $product->detail->quantity ?? 0 }}" step="1" min="0" class="w-full px-3 py-2 border border-gray-300 rounded mt-2" required><br><br>
 
     </div>
     <input type="submit" value="Edit the product" class="bg-blue-600 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer transition duration-200">
