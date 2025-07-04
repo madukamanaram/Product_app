@@ -66,22 +66,28 @@ public function update(product_table $product, Request $request) {
         'quantity' => 'required|numeric|min:0',
     ]);
 
-    // 1. Update product basic info
+    // 1. Update main product table
     $product->update([
         'name' => $validatedData['name'],
         'price' => $validatedData['price'],
     ]);
 
-    // 2. Update product detail only if it exists
+    // 2. Update or create product detail
     if ($product->detail) {
         $product->detail->update([
             'description' => $validatedData['description'],
             'quantity' => $validatedData['quantity'],
         ]);
+    } else {
+        $product->detail()->create([
+            'description' => $validatedData['description'],
+            'quantity' => $validatedData['quantity'],
+        ]);
     }
 
-    return redirect()->route('product.index');
+    return redirect()->route('product.index')->with('success', 'Product updated successfully!');
 }
+
 
 
 
