@@ -10,6 +10,23 @@
     color: #374151; /* Optional: Tailwind's text-gray-700 */
     font-weight: 600;
   }
+
+  
+    
+
+    .custom-form {
+  border: 1px solid #ccc;
+  padding: 20px 30px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 </style>
     </head>
 
@@ -17,16 +34,7 @@
 
 
 <div>
-  <!-- resources/views/products/index.blade.php -->
-
-<!--
-  This example requires updating your template:
-
-  ```
-  <html class="h-full bg-gray-100">
-  <body class="h-full">
-  ```
--->
+<!-- nev bar  -->
 <div class="min-h-full">
   <nav class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -38,62 +46,19 @@
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="{{route('product.create') }}" class="rounded-md  px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white" aria-current="page">Add Product</a>
-              <a href="{{route('product.store') }}" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-gray-300 ">Product List</a>
-              
+              <a href="{{route('product.store') }}" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white  "aria-current="page">Product List</a>
+
+     
+    
             </div>
           </div>
         </div>
         <div class="hidden md:block">
-          <div class="ml-4 flex items-center md:ml-6">
-            <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
-              <span class="absolute -inset-1.5"></span>
-              <span class="sr-only">View notifications</span>
-              <!-- <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-              </svg> -->
-            </button>
-
-            
           
-        </div>
       </div>
     </div>
 
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="md:hidden" id="mobile-menu">
-      <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Dashboard</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Projects</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Reports</a>
-      </div>
-      <div class="border-t border-gray-700 pt-4 pb-3">
-        <div class="flex items-center px-5">
-          <div class="shrink-0">
-            <img class="size-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-          </div>
-          <!-- <div class="ml-3">
-            <div class="text-base/5 font-medium text-white">Tom Cook</div>
-            <div class="text-sm font-medium text-gray-400">tom@example.com</div>
-          </div> -->
-          <button type="button" class="relative ml-auto shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
-            <span class="absolute -inset-1.5"></span>
-            <span class="sr-only">View notifications</span>
-            <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-            </svg>
-          </button>
-        </div>
-        <div class="mt-3 space-y-1 px-2">
-          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your Profile</a>
-          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
-          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign out</a>
-        </div>
-      </div>
-    </div>
+    
   </nav>
 
   <header class="bg-white shadow-sm">
@@ -103,17 +68,49 @@
   </header>
   <main>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <!-- Your content -->
+      
+
+
+<div class="flex items-center justify-center bg-gray-100  ">  
+<!-- nev bar end -->
+
+<!-- Your content -->
+
+  <form method="GET" action="{{ route('product.search') }}" 
+        class="flex items-center gap-2 p-2  rounded-lg  w-full max-w-2xl  "> <!-- serchbar gap -->
+        
+    @csrf
+
+    <input type="text" id="name" name="name" placeholder="Search product..." 
+           class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:outline-none " required>
+
+    <button type="submit" 
+            class="text-sm font-medium text-white bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+      Search
+    </button>
+    
+
+<!-- add product button -->
+
+<a href="{{route('product.create') }}" 
+   class="text-sm font-medium text-white bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
+  Add Product
+</a>
+
+
+  </form>
+</div>
+
 
     
 
 
 
-  <div class="max-w-6xl mx-auto px-4 py-8">
+  <div class="max-w-6xl mx-auto px-5 py-2">
     
 
     <div class="overflow-x-auto bg-white shadow rounded-lg">
-      <table class="min-w-full border-separate border-spacing-y-2 border-spacing-x-3 text-sm text-gray-800">
+      <table class="min-w-full border-separate border-spacing-y-0  text-sm text-gray-800">
         
         <thead class="bg-gray-300">
           <tr>
@@ -135,13 +132,18 @@
         <td >{{ $iteam->detail->description ?? 'No Description' }}</td>
         <td>{{ $iteam->detail->quantity ?? '0' }}</td>
         <td ><a href="{{route('product.edit', ['product'=> $iteam])}}" class="bg-blue-600 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer transition duration-200" >Edit</a> </td>
-        <td>
-          <form method = "POST" action = "{{route('product.delete',['product' => $iteam]) }}">
-            @csrf
-            @method('Delete')
-             <input type="submit" value = "Delete" class="bg-red-500 text-sm font-medium text-white px-4 py-2 rounded hover:bg-red-700 cursor-pointer transition duration-200"/>
-          </form>
-        </td>
+        <div class="inline-flex gap-2">
+        <td class="align-middle text-center">
+  <form method="POST" action="{{ route('product.delete', ['product' => $iteam]) }}" class="inline">
+    @csrf
+    @method('DELETE')
+    <button type="submit"
+            class="bg-red-500 text-sm font-medium text-white px-4 py-2 rounded hover:bg-red-700 cursor-pointer transition duration-200">
+      Delete
+    </button>
+  </form>
+</td>
+
 
     </tr>
     @endforeach
