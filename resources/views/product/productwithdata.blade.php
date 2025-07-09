@@ -1,13 +1,43 @@
 <html class="h-full bg-gray-100">
-    <head>
-  <title>Product App</title>
-  <script src = "https://cdn.tailwindcss.com"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Product App</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <body class="h-full">
+    <!-- Custom Styles -->
+    <style>
+        body {
+            margin: 0;
+        }
+
+        form {
+            border: 1px solid #ccc;
+            padding: 20px 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(165, 91, 91, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body class="h-full ">
+
 
 
 <div>
+      
 <!-- nev bar  -->
 <div class="min-h-full">
   <nav class="bg-gray-800">
@@ -21,16 +51,15 @@
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <div class="flex items-center gap-4">
-  <a href="{{ route('product.store') }}" 
-     class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
-    <!-- Left Arrow Icon -->
-    <svg xmlns="http://www.w3.org/2000/svg" 
-         fill="none" viewBox="0 0 24 24" stroke-width="1.5" 
-         stroke="currentColor" class="w-4 h-4">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-    </svg>
-    Go back to Product List
-  </a>
+              <!-- nev bar nevigations -->
+              
+                      
+                      
+                      
+                      <a href="{{ route('product.store') }}" class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                      <!-- Left Arrow Icon --><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>Go back to Product List</a>
 
   <a href="{{ route('product.create') }}" 
      class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white hover:bg-gray-700">
@@ -57,38 +86,11 @@
   <main>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <!-- Your content -->
-  <style>
-   body {
-  margin: 0;
   
-
-/* nev bar end */
-}
-
-form {
-  border: 1px solid #ccc;
-  padding: 20px 30px;
-  margin: 20px 0;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(165, 91, 91, 0.1);
-  
-}
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-  </style>
-</head>
-<body>
-
-
-
 <div class="flex justify-center items-center min-h-screen px-4 bg-gray-100">
 
   
-  <form method="POST" action="{{ route('product.store') }}"
+  <form id="productForm" method="POST" action="{{ route('product.store') }}"
         class="w-full max-w-[650px] bg-white border border-gray-300 rounded-lg shadow-md p-8">
     @csrf
     
@@ -112,6 +114,36 @@ form {
 
     <input type="submit" value="Add the product" class="bg-blue-600 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer transition duration-200 text-center">
   </form>
+<script>
+  // Setup CSRF for all AJAX requests
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
+  // Submit form via AJAX
+  $('#productForm').on('submit', function(e) {
+      e.preventDefault(); // Prevent normal form submission
+
+      $.ajax({
+          url: $(this).attr('action'), // Uses the form's action attribute
+          method: 'POST',
+          data: $(this).serialize(), // Serializes form data
+          success: function(response) {
+              alert('Product added successfully!');
+              console.log(response);
+              $('#productForm')[0].reset(); // Reset form if needed
+          },
+          error: function(xhr) {
+              alert('Failed to add product');
+              console.log(xhr.responseText);
+          }
+      });
+  });
+</script>
+
+
 </div>
 </body>
 </html>

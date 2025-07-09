@@ -1,22 +1,44 @@
+<html class="h-full bg-gray-100">
 <head>
-  <title>Product App</title>
-  <script src = "https://cdn.tailwindcss.com"></script>
-    </head>
+    <meta charset="UTF-8">
+    <title>Product App</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            margin: 0;
+        }
+
+        form {
+            border: 1px solid #ccc;
+            padding: 20px 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(165, 91, 91, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
 
     <body class="h-full">
 
 
+
 <div>
-  <!-- resources/views/products/index.blade.php -->
-
-<!--
-  This example requires updating your template:
-
-  ```
-  <html class="h-full bg-gray-100">
-  <body class="h-full">
-  ```
--->
+  
 <div class="min-h-full">
   <nav class="bg-gray-800">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -27,95 +49,44 @@
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="{{route('product.create') }}" class="rounded-md  px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 hover:text-white" aria-current="page">Add Product</a>
-              <a href="{{route('product.store') }}" class="rounded-md  px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white ">Product List</a>
+              <!-- nev bar nevigations -->
+              
+                      <a href="{{route('product.create') }}" class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                      <!-- Left Arrow Icon --> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>Go back to Add Product</a>
+                      
+                      
+                      <a href="{{ route('product.store') }}" class="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">
+                      <!-- Left Arrow Icon --><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>Go back to Product List</a>
             
->
+
             </div>
           </div>
         </div>
-        <div class="hidden md:block">
-          <div class="ml-4 flex items-center md:ml-6">
-            <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
-              <span class="absolute -inset-1.5"></span>
-              <span class="sr-only">View notifications</span>
-              <!-- <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-              </svg> -->
-            </button>
-
-            
-        </div>
+        
       </div>
     </div>
 
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="md:hidden" id="mobile-menu">
-      <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Dashboard</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Team</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Projects</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
-        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Reports</a>
-      </div>
-      <div class="border-t border-gray-700 pt-4 pb-3">
-        <div class="flex items-center px-5">
-          <div class="shrink-0">
-            <img class="size-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-          </div>
-          <!-- <div class="ml-3">
-            <div class="text-base/5 font-medium text-white">Tom Cook</div>
-            <div class="text-sm font-medium text-gray-400">tom@example.com</div>
-          </div> -->
-          <button type="button" class="relative ml-auto shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
-            <span class="absolute -inset-1.5"></span>
-            <span class="sr-only">View notifications</span>
-            <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-            </svg>
-          </button>
-        </div>
-        <div class="mt-3 space-y-1 px-2">
-          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your Profile</a>
-          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
-          <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign out</a>
-        </div>
-      </div>
-    </div>
+    
+    
   </nav>
 
   <header class="bg-white shadow-sm">
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Edit Product</h1>
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Add Products</h1>
     </div>
   </header>
   <main>
     <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <!-- Your content -->
-  <style>
-    
+  
 
-    form {
-  border: 1px solid #ccc;
-  padding: 20px 30px;
-  margin: 20px 0;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(165, 91, 91, 0.1);
-  max-width: 500px;
-}
+<div class="flex justify-center items-center min-h-screen px-4 bg-gray-100">
 
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-  </style>
-</head>
-<body>
-<div>
-  <form method="POST" action="{{ route('product.update', ['product' => $product->id]) }}">
+  <form id="editProductForm" method="POST" action="{{ route('product.update', ['product' => $product->id]) }}"class="w-full max-w-[650px] bg-white border border-gray-300 rounded-lg shadow-md p-8">
 
 
     @csrf
@@ -124,29 +95,50 @@
     
     
 
-    <h2 class="text-2xl font-bold tracking-tight text-gray-900" >Edit the Product</h2>
+   <h2 class="text-2xl font-bold tracking-tight text-gray-900">Edit the Product</h2>
 
-    <label for="name"><strong>Product Name:</strong></label><br>
-    
-    <div>
-    <input type="text" id="name" name="name" value="{{$product->name}}" class="w-full px-3 py-2 border border-gray-300 rounded mt-2" ><br><br>
-    </div>
-    <div>
-    <label for="price"><strong>Price:</strong></label><br>
-    </div>
-    <div>
-    <input type="number" name="price" value="{{$product->price}}" placeholder="Enter price (e.g. 19.99)" class="w-full px-3 py-2 border border-gray-300 rounded mt-2" required step="0.01" min="0" max="9999.99"><br><br>
-    
-    <label for="description"><strong>Description:</strong></label><br>
-    <textarea name="description" rows="3" placeholder="Enter description" class="w-full px-3 py-2 border border-gray-300 rounded mt-2" >{{ $product->detail->description ?? '' }} </textarea><br><br>
+<label for="name"><strong>Product Name:</strong></label><br>
+<input type="text" id="name" name="name" value="{{ $product->name }}" placeholder="Enter product name" class="w-full px-3 py-2 border border-gray-300 rounded mt-2" required><br><br>
 
-    
-    <label for="quantity"><strong>Quantity:</strong></label><br>
-    <input type="number" name="quantity" value="{{ $product->detail->quantity ?? 0 }}" step="1" min="0" class="w-full px-3 py-2 border border-gray-300 rounded mt-2" required><br><br>
+<label for="price"><strong>Price (USD):</strong></label><br>
+<input type="number" id="price" name="price" value="{{ $product->price }}" placeholder="Enter price (e.g. 19.99)" class="w-full px-3 py-2 border border-gray-300 rounded mt-2" required step="0.01" min="0" max="9999.99"><br><br>
 
-    </div>
-    <input type="submit" value="Edit the product" class="bg-blue-600 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer transition duration-200">
+<label for="description"><strong>Description:</strong></label><br>
+<textarea id="description" name="description" placeholder="Enter product description" class="w-full px-3 py-2 border border-gray-300 rounded mt-2">{{ $product->detail->description ?? '' }}</textarea><br><br>
+
+<label for="quantity"><strong>Quantity:</strong></label><br>
+<input type="number" id="quantity" name="quantity" value="{{ $product->detail->quantity ?? 0 }}" placeholder="Enter quantity" class="w-full px-3 py-2 border border-gray-300 rounded mt-2" required step="0.01" min="0"><br><br>
+
+<input type="submit" value="Edit the product" class="bg-blue-600 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer transition duration-200 text-center">
+
   </form>
+</div>
+  <script>
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+  });
+
+  $('#editProductForm').on('submit', function(e) {
+      e.preventDefault(); // stop default form submit
+
+      $.ajax({
+          url: $(this).attr('action'),
+          method: 'POST',  // Laravel expects POST with _method=PUT
+          data: $(this).serialize(),
+          success: function(response) {
+              alert('Product updated successfully!');
+              console.log(response);
+              // Optionally reset or do something here
+          },
+          error: function(xhr) {
+              alert('Failed to update product');
+              console.log(xhr.responseText);
+          }
+      });
+  });
+</script>
 </div>
 </body>
 
