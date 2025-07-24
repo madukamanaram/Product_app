@@ -1,7 +1,12 @@
 <html class="h-full bg-gray-100">
     <head>
+      @livewireStyles
   <title>Product App</title>
   <script src = "https://cdn.tailwindcss.com"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <style>
   th, td {
     padding: 1rem 1.5rem; /* Equivalent to px-6 py-4 */
@@ -76,26 +81,17 @@
 
 <!-- Your content -->
 
-  <form method="GET" action="{{ route('product.search') }}" 
-        class="flex items-center gap-2 p-2  rounded-lg  w-full max-w-2xl  "> <!-- serchbar gap -->
-        
-    @csrf
+<livewire:product-search />
 
-    <input type="text" id="name" name="name" placeholder="Search product..." 
-           class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:outline-none " required>
 
-    <button type="submit" 
-            class="text-sm font-medium text-white bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
-      Search
-    </button>
+  
+    
+
     
 
 <!-- add product button -->
 
-<a href="{{route('product.create') }}" 
-   class="text-sm font-medium text-white bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
-  Add Product
-</a>
+
 
 
   </form>
@@ -127,11 +123,11 @@
           @foreach($product as $iteam)
     <tr class="border-b text-center">
         <td class="px-6 py-6">{{ $iteam->id }}</td>
-        <td class="px-6 py-6">{{ $iteam->name }}</td>
+        <td class="px-6 py-6"><span class="product-name" data-id="{{ $iteam->id }}">{{ $iteam->name }}</span></td>
         <td class="px-6 py-6">{{ $iteam->price }}</td>
         <td >{{ $iteam->detail->description ?? 'No Description' }}</td>
         <td>{{ $iteam->detail->quantity ?? '0' }}</td>
-        <td ><a href="{{route('product.edit', ['product'=> $iteam])}}" class="bg-blue-600 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer transition duration-200" >Edit</a> </td>
+<!-- edit-->  <td ><button class="editbutton bg-blue-500 text-sm font-medium text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer transition duration-200" data-id="{{ $iteam->id }}" data-name="{{ $iteam->name }}">Edit</button></td> <!-- edit button -->
         <div class="inline-flex gap-2">
         <td class="align-middle text-center">
   <form method="POST" action="{{ route('product.delete', ['product' => $iteam]) }}" class="inline">
@@ -165,5 +161,64 @@
 
 </div>
   </main>    
+
+  <script>
+  // When edit button is clicked
+  $(document).on("click", ".editbutton", function () {
+    let row = $(this).closest("tr");
+    let nameCell = row.find(".product-name");
+    let id = nameCell.data("id");
+    let currentName = nameCell.text().trim();
+
+    // Prevent duplicate input boxes
+    if (nameCell.find("input").length > 0) return;
+
+    // Replace text with input
+    nameCell.html(`<input type="text" class="name-input border border-gray-400 px-2 py-1 w-full rounded" value="${currentName}" />`);
+    nameCell.find("input").focus();
+  });
+
+  // Save on blur
+  $(document).on("blur", ".name-input", function () {
+    let input = $(this);
+    let newName = input.val().trim();
+    let nameCell = input.closest(".product-name");
+    let id = nameCell.data("id");
+
+    if (newName === "") {
+      nameCell.text("Unnamed");
+      return;
+    }
+
+    // Send only name via AJAX 
+    $.ajax({
+      url: "/products/" + id,
+      method: "POST",
+      data: {
+        _method: "PUT",
+        _token: "{{ csrf_token() }}",
+        name: newName
+      },
+      success: function () {
+        nameCell.html(newName);
+      },
+      error: function (err) {
+        alert("Update failed: " + err.responseText);
+        nameCell.html(input.val());
+      }
+    });
+  });
+
+  // Also save on Enter key
+  $(document).on("keydown", ".name-input", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      $(this).blur(); // Trigger blur event to save
+    }
+  });
+</script>
+
+
+@livewireScripts
     </body>
 </html>
